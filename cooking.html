@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LikePan</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script ENGINE="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="index.html"><img src="img/main_logo.png"></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="index.html">Главная</a></li>
+                    <li><a href="#">Что приготовить</a></li>
+                    <li><a href="#">Меню</a></li>
+                    <li><a href="#">Рецепты</a></li>
+                    <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i> Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container wb">
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <!--левая часть в body-->
+                <h1>Во-первых:</h1><br>
+        
+                <input id="filter-categorya" class="hidden-box" type="checkbox" value="categorya"/>
+                <label for="filter-categorya" class="check--label">
+                    <span class="check--label-box"></span>
+                    <span class="check--label-text">Промой мясо проточной водой</span>
+                </label>
+
+                <input id="filter-categoryb" class="hidden-box" type="checkbox" value="categoryb"/>
+                <label for="filter-categoryb" class="check--label">
+                    <span class="check--label-box"></span>
+                    <span class="check--label-text">Чистое мясо уложить в кастрюлю и залить водой</span>
+                </label>
+
+                <input id="filter-categoryc" class="hidden-box" type="checkbox" value="categoryc"/>
+                <label for="filter-categoryc" class="check--label">
+                    <span class="check--label-box"></span>
+                    <span class="check--label-text">Поставить варить мясо на плиту</span>
+                </label> <br>
+
+                <div class="Box2">
+                    <li>Варим мясо примерно 2 часа. После нажатия на кнопку включится таймер</li>
+                </div> <br>
+
+                <input id="back" type="submit" name="resume_add" value="Назад" onclick="location.href='index.html'">
+
+                <input id="go" type="submit" name="resume_add" value="Варить мясо" onclick="location.href='cooking.html'">
+
+                <input id="add" type="submit" name="resume_add" value="Погнали дальше" onclick="location.href='passir.html'" disabled>
+
+            </div>
+
+            <script type="text/javascript"> // скрипт, активирующий кнопку если все чекбоксы активны
+                $(document).ready(function () {
+                    $('#filter-categorya, #filter-categoryb, #filter-categoryc, #filter-categoryd, #filter-categorye, #filter-categoryf, #filter-categoryg, #filter-categoryh').change(function () {
+                        if ($(this).is(':checked'))
+                            $('#add').removeAttr('disabled');
+                        else
+                            $('#add').attr('disabled', 'disabled');
+                    });
+                });
+
+            </script>
+
+
+            <div class="col-xs-6 col-md-4">
+                <h1>Таймер:</h1><br>
+
+                <div id="countdown">
+                    <div id="tiles"></div>
+                    <div class="labels">
+                        <li>Дней</li>
+                        <li>Часов</li>
+                        <li>Минут</li>
+                        <li>Секунд</li>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <script type="text/javascript">
+            
+                var target_date = new Date().getTime() + (1000 * 3600 * 2); // установить дату обратного отсчета
+                var days, hours, minutes, seconds; // переменные для единиц времени
+
+                var countdown = document.getElementById("tiles"); // получить элемент тега
+
+                getCountdown();
+
+                setInterval(function () { getCountdown(); }, 1000);
+
+                function getCountdown() {
+
+                    var current_date = new Date().getTime();
+                    var seconds_left = (target_date - current_date) / 1000;
+
+                    days = pad(parseInt(seconds_left / 86400));
+                    seconds_left = seconds_left % 86400;
+
+                    hours = pad(parseInt(seconds_left / 3600));
+                    seconds_left = seconds_left % 3600;
+
+                    minutes = pad(parseInt(seconds_left / 60));
+                    seconds = pad(parseInt(seconds_left % 60));
+
+                    // строка обратного отсчета  + значение тега
+                    countdown.innerHTML = "<span>" + days + "</span><span>" + hours + "</span><span>" + minutes + "</span><span>" + seconds + "</span>";
+                }
+
+                function pad(n) {
+                    return (n < 10 ? '0' : '') + n;
+                }
+            </script>
+
+
+        </div>
+
+
+    </div>
+
+    <!--footer-->
+    <div id="f">
+        <div class="container">
+            <div class="row centered">
+
+                <div class="col-md-4">
+                    <span style="color: #969ba5;">&copy;2020 Все права защещины</span>
+                </div>
+
+                <div class="col-md-4">
+                    <p>Готовые рецепты</p>
+                </div>
+
+                <div class="col-md-4">
+                    <p>Приложение на телефон</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--footer-->
+
+</body>
